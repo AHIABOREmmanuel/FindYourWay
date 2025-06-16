@@ -43,7 +43,7 @@ export default {
 
 .school-image {
   width: 100%;
-  height: 00px;
+  height: 200px;
   object-fit: cover;
 }
 
