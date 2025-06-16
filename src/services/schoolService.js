@@ -78,5 +78,22 @@ export default {
       console.error('Error fetching school testimonials:', error)
       throw error
     }
+  },
+
+  /**
+   * Télécharge la fiche technique d'une école
+   * @param {number} id - L'ID de l'école
+   * @returns {Promise<Blob>} Le fichier de la fiche technique
+   */
+  async downloadTechnicalSheet(id) {
+    try {
+      const response = await apiClient.get(`/schools/${id}/technical-sheet`, {
+        responseType: 'blob'
+      })
+      return response.data
+    } catch (error) {
+      console.error('Error downloading technical sheet:', error)
+      throw error
+    }
   }
 } 
