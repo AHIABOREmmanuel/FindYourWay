@@ -54,10 +54,16 @@
           <!-- Fiche technique -->
           <div class="technical-sheet" v-if="school.technicalSheetUrl">
             <h2>Documents</h2>
-            <button @click="showTechnicalSheet" class="tech-button">
-              <i class="fas fa-file-pdf"></i>
-              Voir la fiche technique
-            </button>
+            <div class="button-group">
+              <button @click="showTechnicalSheet" class="tech-button">
+                <i class="fas fa-file-pdf"></i>
+                Voir la fiche technique
+              </button>
+              <button @click="downloadTechnicalSheet" class="tech-button download">
+                <i class="fas fa-download"></i>
+                Télécharger la fiche
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -101,13 +107,43 @@
         }
       }
   
+      const downloadTechnicalSheet = async () => {
+        if (school.value?.technicalSheetUrl) {
+          try {
+            // Récupérer le fichier
+            const response = await fetch(school.value.technicalSheetUrl)
+            const blob = await response.blob()
+            
+            // Créer une URL pour le blob
+            const url = window.URL.createObjectURL(blob)
+            
+            // Créer un lien de téléchargement
+            const link = document.createElement('a')
+            link.href = url
+            link.download = `fiche_technique_${school.value.name}`
+            
+            // Déclencher le téléchargement
+            document.body.appendChild(link)
+            link.click()
+            
+            // Nettoyer
+            document.body.removeChild(link)
+            window.URL.revokeObjectURL(url)
+          } catch (error) {
+            console.error('Erreur lors du téléchargement:', error)
+            alert('Une erreur est survenue lors du téléchargement')
+          }
+        }
+      }
+  
       onMounted(fetchSchoolDetails)
   
       return {
         school,
         loading,
         error,
-        showTechnicalSheet
+        showTechnicalSheet,
+        downloadTechnicalSheet
       }
     }
   }
@@ -347,5 +383,19 @@
   
   .retry-button:hover {
     background: #3aa876;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .tech-button.download {
+    background: #2c3e50;
+  }
+  
+  .tech-button.download:hover {
+    background: #1a252f;
   }
   </style> 

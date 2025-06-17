@@ -3,7 +3,7 @@
     <BackButton />
     <div class="logo-corner">
       <router-link to="/">
-        <img src="@/assets/logo.svg" alt="FindYourWay Logo" class="corner-logo" />
+        <img src="../assets/logo1.svg" alt="FindYourWay Logo" class="corner-logo" />
       </router-link>
     </div>
     

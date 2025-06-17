@@ -2,7 +2,7 @@
   <div class="home-wrapper">
     <div class="home-container">
       <div class="logo-corner">
-        <img src="../assets/logo.svg" alt="FindYourWay Logo" class="corner-logo" width="100" height="50" />
+        <img src="../assets/logo1.svg" alt="FindYourWay Logo" class="corner-logo" width="100" height="100" />
       </div>
       <div class="search-content">
         <h1 class="title">Trouvez votre école idéale</h1>
